@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.oz.mybatiss.repositories.ILocalStudentRepository">
+    
+    <!-- public void insertStudent(Student student); -->
+    <insert id="insertStudent" parameterType="Student"  useGeneratedKeys="true">
+		INSERT INTO students(FIRST_NAME,AGE) VALUES(#{firstName},#{age})
+	</insert>
+    
+    <!-- public Student selectStudentById(int id); -->
+    <select id="selectStudentById" resultType="Student" >
+    	SELECT * FROM students WHERE ID = #{id}
+    </select>
+    
+    <!-- public List<Student> selectStudentByFirstName(String firstName); -->
+    <select id="selectStudentByFirstName" parameterType="String" resultType="Student" >
+    	SELECT * FROM students WHERE FIRST_NAME = #{firstName}
+    </select>
+    
+    <!-- public void updateStudent(Student student); -->
+    <update id = "updateStudent" parameterType = "Student">
+      UPDATE students SET FIRST_NAME = #{firstName}, AGE = #{age} WHERE ID = #{id}
+   </update>
+    
+    <delete id="deleteStudentById" parameterType="Integer">
+    	DELETE FROM students WHERE ID = #{id}
+    </delete>
+    
+    <!--  
+   <select id = "test" parameterType = "Student" resultType = "Student">
+   SELECT * FROM students 
+   <where>
+   <choose>
+      <when test = "firstName != null">
+         AND FIRST_NAME LIKE #{firstName}
+      </when> 
+
+      <when test = "age != null">
+         AND AGE LIKE #{age}
+      </when>
+   </choose>
+	</where>
+	</select>
+    -->
+    
+    
+</mapper>	
